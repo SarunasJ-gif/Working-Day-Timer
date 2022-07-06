@@ -5,7 +5,7 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 WORK_MIN = 50
-COFFEE_BREAK_MIN = 5
+COFFEE_BREAK_MIN = 10
 LUNCH_BREAK_MIN = 60
 timer = None
 hours = 0
@@ -22,7 +22,6 @@ def reset():
     check = ""
     check_hours.config(text=check)
     hours = 0
-
 
 
 def start_timer():
@@ -65,15 +64,14 @@ def count_time(count):
         seconds = f"0{seconds}"
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
     if count > 0:
-        timer = screen.after(1000, count_time, count - 1)
+        timer = screen.after(1, count_time, count - 1)
     else:
         start_timer()
-
     if len(check) == 8:
         timer_label.config(text="TIME GO HOME")
         timer_label.config(fg=GREEN)
         screen.after_cancel(timer)
-        canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
+        canvas.itemconfig(timer_text, text="00:00")
 
 
 screen = Tk()
